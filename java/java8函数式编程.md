@@ -202,11 +202,13 @@ public class Hello {
 #### 8. 业务上常用到lambda的地方
 
 + entity和DTO之间频繁的mapper。
-+ 集合的处理
++ 集合的处理。
 
 #### 9. 杂项
 
-延伸阅读:[lambda-state-final](http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html)
+延伸阅读:
+
+[lambda-state-final](http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html)
 
 延伸思考：
 
@@ -225,3 +227,5 @@ go语言为什么比java更支持高并发？
 go语言多返回值与柯里化？
 
 多线程与异步的区别？
+
+**本文来源**：本文翻译自http://www.lambdafaq.org/，仅供学习使用，转载请注明出处:https://github.com/fallingyang/docs。
