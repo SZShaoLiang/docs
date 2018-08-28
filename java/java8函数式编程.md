@@ -201,8 +201,53 @@ public class Hello {
 
 #### 8. 业务上常用到lambda的地方
 
-+ entity和DTO之间频繁的mapper。
-+ 集合的处理。
++ JPA以及Entity和DTO之间频繁的Mapper。
+
+  我们在使用Spring JPA时，仓储（Repository）继承JpaRepository；JPA提供的findById查询会返回Optional\<T>，Optional中的大部分方法参数类型都是函数式接口，所以Optional方法可以传入lambda表达式。例如：
+
+  ```java
+  // 删除先找后删，通过JPA提供的findById方法，获得一个Optional<Role>,
+  // 调用Optional的ifPresent方法，表示如果找到Role，就执行方法中的lambda表达式，
+  // 如果没有找到，就什么也不做。
+  roleRepository.findById(id).ifPresent((role) -> roleRepository.delete(role));
+  // 可以用双冒号（方法参考符）将方法调用简写为下面
+  roleRepository.findById(id).ifPresent(roleRepository::delete);
+  ```
+
+  思考下面的代码：
+
+  ```java
+  // 下面是RoleController里的一段代码，意思是如果Optional中Role不为null，就返回Role，状态码为200
+  // 如果Role为null，也不会报空指针异常，而是会返回状态码404。
+  // 注意：此处为示例代码，实际业务中禁止在controller层直接调用repository层。
+  public ResponseEntity<Role> getUserById(@PathVariable String id) {
+          logger.debug("REST request to get User : {}", id);
+          return ResponseUtil.wrapOrNotFound(roleRepository.findById(id));
+  }
+
+  <X> ResponseEntity<X> wrapOrNotFound(Optional<X> maybeResponse, HttpHeaders header) {
+          return maybeResponse.map(response -> ResponseEntity.ok().headers(header).body(response))
+              .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+  ```
+
+  另外JPA提供的findAll方法会返回Page\<T>或者List\<T>，他们的方法都可以传入lambda表达式。
+
+  ```java
+  // findAll返回一个Page<User>，使用map方法传入lambda表达式，将返回Page<UserDTO>。
+  userRepository.findAll(specifications, pageable).map(new UserMapper()::userToUserDTO);
+  ```
+
+  ​
+
++ 集合的处理（stream）。
+
+  ```java
+  // userDTO.getAuthorities()返回的是一个Set<String>，代表roleId的集合
+  Set<Role> authorities = userDTO.getAuthorities().stream().map(roleRepository::getOne).collect(Collectors.toSet());
+  ```
+
+  关于stream，这里不多讲，是另一大块的内容，总之，collection可以转化为stream，而流里的方法都可以接收lambda表达式，最后处理完成后再转回collection。
 
 #### 9. 杂项
 
