@@ -257,6 +257,8 @@ public class Hello {
 
 延伸思考：
 
+函数式接口Consumer vs Supplier vs Function的区别？
+
 方法和函数的区别？
 
 多CPU、多核、超线程的关系？

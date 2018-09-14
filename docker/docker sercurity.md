@@ -1,6 +1,8 @@
 容器提供隔离：使用默认设置，Docker 容器内的进程无法访问来自主机或其他并置容器的信息。但是，由于容器共享主机的内核，因此隔离不像虚拟机那样完整。攻击者可以找到未知的漏洞（在 Docker 或 Linux 内核本身中），这些漏洞将允许攻击者从容器中逃脱。如果攻击者确实发现了漏洞并且你的进程在容器内以 root 身份运行，则他们将获得对主机的 root 访问权限。
 
-![img](docker-security.png)图 6. 左侧，虚拟机使用虚拟化硬件。右侧，容器中的应用程序使用主机内核。
+![docker-security](../image/docker-security.png)
+
+图 6. 左侧，虚拟机使用虚拟化硬件。右侧，容器中的应用程序使用主机内核。
 
 为避免这种可能性，最佳做法是不在容器内以 root 身份运行进程。你可以使用 PodSecurityPolicy 在 Kubernetes 中强制执行此行为 。在 Kubernetes 中创建 pod 时，使用 runAsUser 选项 指定正在运行该进程的 Linux 用户。这种方法会覆盖 Dockerfile 中的 USER 指令。
 
