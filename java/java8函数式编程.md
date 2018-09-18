@@ -275,4 +275,4 @@ go语言多返回值与柯里化？
 
 多线程与异步的区别？
 
-**本文来源**：本文翻译自http://www.lambdafaq.org/，仅供学习使用，转载请注明出处:https://github.com/fallingyang/docs。
+**本文来源**：本文翻译自http://www.lambdafaq.org/ ，仅供学习使用，转载请注明出处:https://github.com/fallingyang/docs。
