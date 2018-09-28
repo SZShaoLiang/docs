@@ -141,9 +141,9 @@ getsockopt(client_fd, SOL_IP, SO_ORIGINAL_DST, original_server_addr, &server_siz
 
 在firefox浏览器选择一个证书并打开，我们会看到如下页面：
 
-      ![https-ca-2](../image/https-ca-2.jpeg)
+  ![https-ca-2](../image/https-ca-2.jpeg)
 
-      ![https-ca-3](../image/https-ca-3.jpeg)
+  ![https-ca-3](../image/https-ca-3.jpeg)
 通过伪造CA证书，实现SSL中间人攻击 通过伪造CA证书，实现SSL中间人攻击
 
 从中我们可以看出，一个证书拥有如下的结构：
