@@ -1,0 +1,13 @@
+Spring 中有三种构建类型的设计模式，以Adapter结尾的是适配器，以Configurer结尾的是配置器，以Builder结尾的是建造器。
+
+ApplicationContext中事件处理是由ApplicationEvent类和ApplicationListener接口来提供的。如果一个Bean实现了ApplicationListener接口，并且已经发布到容器中去，每次ApplicationContext发布一个ApplicationEvent事件，这个Bean就会接到通知。Spring事件机制是观察者模式的实现。
+
+SpringApplication run准备上下文过程中发布环境准备事件，环境准备事件发送给监听器初始化父上下文。
+
+Spring Security中用到了委托模式。
+
+业务中用委托模式和命令模式来做不同角色管理员的数据权限。
+
+Spring应用启动时的事件发布与监听，与kubernetes sig node操作容器时各种事件的监听异同之处：前者是同步的，单个监听器失败会阻塞整个流程，后者中任何耗时的监听器都会新开一个goroutine。
+
+观察者模式，发布订阅模式，控制器模式的异同。
