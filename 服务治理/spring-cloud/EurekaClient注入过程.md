@@ -4,8 +4,6 @@
 
 + EnableDiscoveryClientImportSelector
 
-  使用
-
 + AutoServiceRegistrationConfiguration
 
 + EurekaDiscoveryClient
@@ -35,4 +33,8 @@ public EurekaInstanceConfigBean(InetUtils inetUtils) {
   - ApplicationEnvironmentPreparedEvent：spring boot 对应Enviroment已经准备完毕，但此时上下文context还没有创建。
   - ApplicationPreparedEvent：spring boot上下文context创建完成，但此时spring中的bean是没有完全加载完成的。
   - ApplicationFailedEvent：spring boot启动异常时执行事件
+
+
+
+问题：`eureka.server.enable-self-preservation=false`解决使用docker来停止服务时，服务没有机会发送下线心跳，多次重启服务后出现假服务。
 
